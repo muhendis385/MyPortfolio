@@ -39,7 +39,7 @@ Ziyaretçilerin UI üzerinden gönderdiği mesajların, admin panelinde tarihli 
 🙋‍♂️ Hakkımda
 
 <img width="2866" height="1096" alt="Hakkımda" src="https://github.com/user-attachments/assets/e3a108f9-c048-4f94-899e-91f13fb5f247" />
-**---------------------------**
+
 💼 Deneyimler
 
 <img width="2812" height="1288" alt="Deneyimler" src="https://github.com/user-attachments/assets/2aa4f0ff-eff0-4cb3-af32-b3819be1b5f6" />
