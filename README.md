@@ -29,44 +29,45 @@ Ziyaretçilerin UI üzerinden gönderdiği mesajların, admin panelinde tarihli 
 * **Sertifikalar:** Kişinin aldığı sertifiların dinamik güncellenmesi.
 * **Projeler:**  Kişinin yaptığı projelerin dinamik olarak güncellenmesi ve sergilenmesi.
 ## 📸 Ekran Görüntüleri
-🌐 Kullanıcı Arayüzü (UI)
 
+🌐 Kullanıcı Arayüzü (UI)
+**-----------------------------------------------------------**
 🏠 Ana Bilgiler
 
 <img width="2856" height="1164" alt="AnaBilgiler" src="https://github.com/user-attachments/assets/1b30e3c7-456e-4075-afa2-c4904bbfb94f" />
-
+**---------------------------**
 🙋‍♂️ Hakkımda
 
 <img width="2866" height="1096" alt="Hakkımda" src="https://github.com/user-attachments/assets/e3a108f9-c048-4f94-899e-91f13fb5f247" />
-
+**---------------------------**
 💼 Deneyimler
 
 <img width="2812" height="1288" alt="Deneyimler" src="https://github.com/user-attachments/assets/2aa4f0ff-eff0-4cb3-af32-b3819be1b5f6" />
-
+**---------------------------**
 🎓 Eğitim
 
 <img width="2856" height="1282" alt="Eğitim" src="https://github.com/user-attachments/assets/005b42b8-8f56-4e51-a0ad-dd11f92d4a09" />
-
+**---------------------------**
 🧠 Yetenekler
 
 <img width="2842" height="1046" alt="Yetenekler" src="https://github.com/user-attachments/assets/699c3838-b7fe-4d7d-9910-e6a5487684d8" />
-
+**---------------------------**
 🏆 Sertifikalar
 
 <img width="2484" height="678" alt="Sertifikalar" src="https://github.com/user-attachments/assets/36fd6911-cafa-4c65-a66a-85dc25bc634b" />
-
+**---------------------------**
 📂 Projeler
 
 <img width="2838" height="1088" alt="Projeler" src="https://github.com/user-attachments/assets/766afde5-6a4f-444b-954f-d07697d0c99a" />
-
+**---------------------------**
 📬 İletişim
 
 <img width="2864" height="1488" alt="İletişim" src="https://github.com/user-attachments/assets/3d4bbf20-be54-4bfa-9bf2-8c77f39d823a" />
 
-
+**---------------------------**
 🔐 Admin Paneli
 Tüm içerikler admin paneli üzerinden yönetilmektedir.
-
+**-----------------------------------------------------------**
 📊 Dashboard
 
 <img width="2794" height="1522" alt="Dashboard" src="https://github.com/user-attachments/assets/6ac396e6-69a2-4f6d-aa4b-cb9b7c02b1ba" />
