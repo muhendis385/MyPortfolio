@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - Portfolyo Yönetimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* YENİ TEMA: Mor ve Turuncu Ağırlıklı */
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #b224ef 50%, #ff7e5f 100%);
+            --secondary-gradient: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%);
+            
+            --sidebar-bg: rgba(20, 20, 25, 0.95); /* Hafif transparan */
+            --main-bg: #0f0f12; /* Çok koyu mor-siyah */
+            --card-bg: #1a1a20;
+            
+            --text-color: #e0e0e0;
+            --text-muted: #8a8a9b;
+            --border-color: #2a2a35;
+            
+            --hover-bg: rgba(106, 17, 203, 0.1); /* Mor hover */
+            --accent-purple: #b224ef;
+            --accent-orange: #ff7e5f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif; /* Font değişti */
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            background-image: radial-gradient(circle at top right, rgba(178, 36, 239, 0.1), transparent 40%);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR TASARIMI (MODERN) --- */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            backdrop-filter: blur(10px); /* Cam efekti */
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+            box-shadow: 5px 0 30px rgba(0,0,0,0.3);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            box-shadow: 0 0 15px rgba(178, 36, 239, 0.4);
+        }
+
+        .logo-text h2 {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .menu-title {
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding-left: 12px;
+            font-weight: 600;
+        }
+
+        .sidebar-menu ul li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu ul li a {
+            display: flex;
+            align-items: center;
+            padding: 14px 15px;
+            color: var(--text-muted);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-menu ul li a i {
+            width: 25px;
+            margin-right: 12px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover Efekti */
+        .sidebar-menu ul li a:hover {
+            background-color: var(--hover-bg);
+            color: #fff;
+            padding-left: 20px;
+        }
+
+        .sidebar-menu ul li a:hover i {
+            color: var(--accent-orange);
+            transform: scale(1.1);
+        }
+
+        /* Aktif Menü Elemanı */
+        .sidebar-menu ul li a.active {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(178, 36, 239, 0.4);
+        }
+
+        .sidebar-menu ul li a.active i {
+            color: #fff;
+        }
+
+        /* Sidebar Alt Kısım (Kullanıcı Profili) */
+        .user-profile {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .user-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #2a2a35;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent-purple);
+            overflow: hidden;
+        }
+        
+        .user-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-info h4 {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .user-info p {
+            font-size: 12px;
+            color: var(--accent-orange);
+        }
+
+        .logout-btn {
+            margin-left: auto;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.05);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .logout-btn:hover {
+            color: #fff;
+            background: #ef4444;
+        }
+
+        /* --- MAIN CONTENT TASARIMI --- */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .date-badge {
+            background: rgba(178, 36, 239, 0.1);
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(178, 36, 239, 0.3);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent-purple);
+            font-weight: 500;
+        }
+
+        /* --- TABLO VE İÇERİK STİLLERİ --- */
+        .content-area {
+            display: block;
+            background: transparent;
+            border: none;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-add {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 15px rgba(178, 36, 239, 0.4);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(178, 36, 239, 0.6);
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th, td {
+            padding: 20px 25px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: rgba(20, 20, 25, 0.5);
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr {
+            transition: background-color 0.2s;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: #fff;
+        }
+        
+        /* Görseller için yuvarlak stil */
+        .table-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px; /* Tam yuvarlak yerine hafif kare */
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+
+        .btn-edit {
+            background-color: rgba(178, 36, 239, 0.15); /* Mor şeffaf */
+            color: var(--accent-purple);
+            border: 1px solid rgba(178, 36, 239, 0.3);
+        }
+
+        .btn-edit:hover {
+            background-color: var(--accent-purple);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: rgba(239, 68, 68, 0.15); /* Kırmızı şeffaf */
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-delete:hover {
+            background-color: #ef4444;
+            color: white;
+        }
+        
+        /* Link Stilleri */
+        table a {
+            color: var(--accent-orange) !important;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        table a:hover {
+            color: #fff !important;
+            text-shadow: 0 0 10px var(--accent-orange);
+        }
+
+        /* Progress Bar Stilleri (Gradient Değişti) */
+        .progress-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-container {
+            flex: 1;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 8px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease-in-out;
+            box-shadow: 0 0 10px rgba(178, 36, 239, 0.5);
+        }
+
+        .progress-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            width: 40px;
+            text-align: right;
+        }
+        
+        /* Dashboard Placeholder İkonu */
+        #section-dashboard i.fa-table-columns {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.8 !important;
+            filter: drop-shadow(0 0 15px rgba(178, 36, 239, 0.4));
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="logo-text">
+                <h2>AdminPanel</h2>
+                <span>YÖNETİM SİSTEMİ</span>
+            </div>
+        </div>
+
+        <div class="menu-title">Yönetim</div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="#" class="active" onclick="setActive(this, 'Dashboard', 'section-dashboard')">
+                        <i class="fa-solid fa-grid-2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Ana Bilgiler', 'section-ana-bilgiler')">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Ana Bilgiler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Hakkımda', 'section-hakkimda')">
+                        <i class="fa-regular fa-id-card"></i>
+                        <span>Hakkımda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Deneyimler', 'section-deneyimler')">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span>Deneyimler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Eğitim', 'section-egitim')">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Eğitim</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Yetenekler', 'section-yetenekler')">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Yetenekler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Sertifikalar', 'section-sertifikalar')">
+                        <i class="fa-solid fa-certificate"></i>
+                        <span>Sertifikalar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'Projeler', 'section-projeler')">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>Projeler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="setActive(this, 'İletişim', 'section-iletisim')">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>İletişim</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="user-profile">
+            <div class="user-img">
+                <i class="fa-solid fa-user" style="color: #fff;"></i>
+            </div>
+            <div class="user-info">
+                <h4>Admin</h4>
+                <p>Full Access</p>
+            </div>
+            <div class="logout-btn">
+                <i class="fa-solid fa-power-off"></i>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <div class="page-title">
+                <h1 id="page-header">Dashboard</h1>
+                <p>Sistem üzerindeki güncel veriler ve yönetim paneli.</p>
+            </div>
+            <div class="date-badge">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span id="current-date">25 Aralık, 2025</span>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+
+            <div id="section-dashboard" class="page-section">
+                <div class="content-area"
+                    style="min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.02); border: 1px dashed #333; border-radius: 20px;">
+                    <i class="fa-solid fa-table-columns"
+                        style="font-size: 56px; margin-bottom: 25px;"></i>
+                    <h3 style="font-weight: 600; color: #fff;">Dashboard</h3>
+                    <p style="color: var(--text-muted);">Genel bakış ve istatistikler buraya gelebilir.</p>
+                </div>
+            </div>
+
+            <div id="section-ana-bilgiler" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Bilgi Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Görsel</th>
+                                <th>Başlık</th>
+                                <th>Alt Başlık</th>
+                                <th>Açıklama</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="https://via.placeholder.com/150" alt="Profil" class="table-img"></td>
+                                <td><strong style="color: white;"> AHMET SEMİZ</strong></td>
+                                <td><span style="color: var(--accent-orange); font-size: 13px;">.Net Backend Developer</span></td>
+                                <td>Portfolyo siteme hoşgeldiniz! Ben Ahmet, kurumsal ihtiyaçlara yönelik modern .NET
+                                    tabanlı uygulamalar geliştiren...</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-hakkimda" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Hakkımda Yazısı Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>İçerik</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3" style="text-align:center; padding: 40px; color: var(--text-muted);">
+                                    <i class="fa-regular fa-folder-open" style="font-size: 24px; margin-bottom: 10px; display:block;"></i>
+                                    Henüz veri eklenmemiş.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-deneyimler" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Deneyim Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">ID</th>
+                                <th>Pozisyon (Title)</th>
+                                <th>Firma (Company)</th>
+                                <th>Açıklama (Description)</th>
+                                <th>Tarih</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span style="background: #333; padding: 2px 8px; border-radius: 4px; font-size: 11px;">#1</span></td>
+                                <td><strong style="color: white;">Game Developer Intern</strong></td>
+                                <td>GamesMrkt</td>
+                                <td>Hyper-Casual mobil oyunun prototip geliştirme sürecinde görev aldım ve seviye
+                                    tasarımı ile çalıştım. Unity Netcode kullanarak...</td>
+                                <td><span style="color: var(--accent-purple); font-weight: 500;">Temmuz 2025 - Eylül 2025</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: #333; padding: 2px 8px; border-radius: 4px; font-size: 11px;">#2</span></td>
+                                <td><strong style="color: white;">Oyun Geliştirme Bursiyeri</strong></td>
+                                <td>Google AI ve Teknoloji Akademisi</td>
+                                <td>Yapay zeka odaklı eğitim programına kabul edildim. Unity ve C# kullanarak mini oyun
+                                    projeleri geliştirdim...
+                                </td>
+                                <td><span style="color: var(--accent-purple); font-weight: 500;">Ocak 2025 - Eylül 2025</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-egitim" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Eğitim Bilgisi Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">ID</th>
+                                <th>Okul (SchoolName)</th>
+                                <th>Bölüm/Açıklama (Description)</th>
+                                <th>Yıl (Year)</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong style="color: white;">Mersin Üniversitesi</strong></td>
+                                <td><strong style="color: var(--accent-orange);">Bilgisayar Mühendisliği</strong><br>Şu an da 4. sınıf Bilgisayar
+                                    Mühendisliği Öğrencisi olarak eğitimimi sürdürmekteyim</td>
+                                <td>2021 - Devam Ediyor</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong style="color: white;">Affan Kitapçıoğlu Anadolu Lisesi</strong></td>
+                                <td><strong style="color: var(--accent-orange);">Lise Öğrenimi</strong><br>93.62 Not ortalamasıyla Okul birincisi olarak
+                                    mezun oldum.</td>
+                                <td>2016 - 2020</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-yetenekler" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Yetenek Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">SkillId</th>
+                                <th style="width: 200px;">SkillName</th>
+                                <th>Percent (Yüzde)</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><i class="fa-brands fa-c" style="color: #A8B9CC; margin-right: 8px;"></i> <strong>C</strong></td>
+                                <td>
+                                    <div class="progress-wrapper">
+                                        <div class="progress-container">
+                                            <div class="progress-bar" style="width: 75%;"></div>
+                                        </div>
+                                        <span class="progress-text">75%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><i class="fa-brands fa-python" style="color: #4584b6; margin-right: 8px;"></i> <strong>Python</strong></td>
+                                <td>
+                                    <div class="progress-wrapper">
+                                        <div class="progress-container">
+                                            <div class="progress-bar" style="width: 70%;"></div>
+                                        </div>
+                                        <span class="progress-text">70%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><i class="fa-brands fa-microsoft" style="color: #925fa4; margin-right: 8px;"></i> <strong>ASP.NET Core</strong></td>
+                                <td>
+                                    <div class="progress-wrapper">
+                                        <div class="progress-container">
+                                            <div class="progress-bar" style="width: 85%;"></div>
+                                        </div>
+                                        <span class="progress-text">85%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><i class="fa-solid fa-code" style="color: #178600; margin-right: 8px;"></i> <strong>C#</strong></td>
+                                <td>
+                                    <div class="progress-wrapper">
+                                        <div class="progress-container">
+                                            <div class="progress-bar" style="width: 80%;"></div>
+                                        </div>
+                                        <span class="progress-text">80%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-sertifikalar" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Sertifika Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">CertId</th>
+                                <th>CertificateName</th>
+                                <th>CompanyName (Kurum)</th>
+                                <th>Year</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="text-align:center; padding: 40px; color: var(--text-muted);">
+                                    <i class="fa-solid fa-award" style="font-size: 24px; margin-bottom: 10px; display:block;"></i>
+                                    Henüz veri eklenmemiş.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-projeler" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni Proje Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">PrjId</th>
+                                <th>ProjectName</th>
+                                <th>ProjectDescription</th>
+                                <th>UsingTechnologies</th>
+                                <th>ProjectUrl</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong style="color: white;">Stock Market Platform</strong></td>
+                                <td>Hisse senedi alım-satım ve takip işlemlerini gerçekleştiren bir Web API platformu...</td>
+                                <td><span style="font-size: 11px; color: var(--accent-orange); background: rgba(255, 126, 95, 0.1); padding: 4px 8px; border-radius: 6px;">C#, .NET Core, Web API, JWT</span></td>
+                                <td><a href="#" target="_blank">İncele <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></a></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong style="color: white;">Recipe Shared Platform</strong></td>
+                                <td>Kullanıcıların yemek tariflerini paylaşabildiği ve yönetebildiği bir Web API...</td>
+                                <td><span style="font-size: 11px; color: var(--accent-orange); background: rgba(255, 126, 95, 0.1); padding: 4px 8px; border-radius: 6px;">Code-First, MSSQL, LINQ</span></td>
+                                <td><a href="#" target="_blank">İncele <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i></a></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-iletisim" class="page-section" style="display: none;">
+                <div class="toolbar">
+                    <button class="btn btn-add">
+                        <i class="fa-solid fa-plus"></i> Yeni İletişim Bilgisi Ekle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">Id</th>
+                                <th>Description</th>
+                                <th>EmailAdress</th>
+                                <th>LinkedInUrl</th>
+                                <th>GitHubUrl</th>
+                                <th>InstagramUrl</th>
+                                <th style="width: 180px;">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yeni bir proje fikriniz mi var veya sadece merhaba demek mi istiyorsunuz?</td>
+                                <td><span style="color: white;">ugur.nalbant617@gmail.com</span></td>
+                                <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <a href="#">linkedin.com/in/ugur...</a>
+                                </td>
+                                <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <a href="#">github.com/ugurnalbant</a>
+                                </td>
+                                <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <a href="#">instagram.com/ugur...</a>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit"><i class="fa-solid fa-pen"></i>
+                                            Güncelle</button>
+                                        <button class="btn btn-sm btn-delete"><i class="fa-solid fa-trash"></i>
+                                            Sil</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Tarihi Güncelleme
+        const dateElement = document.getElementById('current-date');
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = new Date().toLocaleDateString('tr-TR', options);
+
+        // Menü Aktiflik Fonksiyonu
+        function setActive(element, title, sectionId) {
+            // Tüm aktif sınıfları kaldır
+            const links = document.querySelectorAll('.sidebar-menu a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // Tıklanana aktif sınıfı ekle
+            element.classList.add('active');
+
+            // Başlığı güncelle
+            document.getElementById('page-header').textContent = title;
+
+            // Bölüm Değiştirme Mantığı
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.style.display = 'none'; // Önce hepsini gizle
+            });
+
+            // İlgili bölümü göster
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

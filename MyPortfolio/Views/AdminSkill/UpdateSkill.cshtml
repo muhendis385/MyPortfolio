@@ -1,0 +1,57 @@
+﻿@model MyPortfolio.Data.Skill
+@{
+    ViewData["Title"] = "Yetenek Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-area">
+
+    <div style="margin-bottom:40px;">
+        <h2 style="font-size:26px; font-weight:700; color:#fff;">Yetenek Güncelle</h2>
+        <p style="color:var(--text-muted); font-size:14px; margin-top:8px;">
+            Yetenek adını veya seviyesini güncelleyebilirsin.
+        </p>
+    </div>
+
+    <form asp-action="UpdateSkill" method="post" class="table-container" style="padding:35px; max-width:900px;">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="SkillId" />
+
+        <div style="margin-bottom:22px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                Yetenek Adı (Name)
+            </label>
+            <input asp-for="Name"
+                   style="width:100%; padding:14px 16px; border-radius:12px; background-color:#14141a;
+                          border:1px solid var(--border-color); color:#fff; font-size:14px;" />
+            <span style="display:block; margin-top:8px; font-size:12px; color:#f87171;">
+                @Html.ValidationMessageFor(x => x.Name)
+            </span>
+        </div>
+
+        <div style="margin-bottom:30px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                Seviye (Level) (0-100)
+            </label>
+
+            <input asp-for="Level" type="number" min="0" max="100"
+                   style="width:100%; padding:14px 16px; border-radius:12px; background-color:#14141a;
+                          border:1px solid var(--border-color); color:#fff; font-size:14px;" />
+
+            <span style="display:block; margin-top:8px; font-size:12px; color:#f87171;">
+                @Html.ValidationMessageFor(x => x.Level)
+            </span>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+            <a asp-controller="AdminSkill" asp-action="Index" class="btn btn-sm btn-edit" style="text-decoration:none;">
+                <i class="fa-solid fa-arrow-left"></i> Geri
+            </a>
+
+            <button type="submit" class="btn btn-add">
+                <i class="fa-solid fa-save"></i> Güncelle
+            </button>
+        </div>
+    </form>
+</div>

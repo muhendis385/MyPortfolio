@@ -1,0 +1,35 @@
+﻿@using MyPortfolio.Data
+@model List<Education>
+
+<section class="scroll-mt-20" id="education">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Eğitim
+    </h2>
+
+    <div class="space-y-6">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="glass-panel p-8 rounded-3xl text-center text-gray-400 italic">
+                Henüz eğitim bilgisi eklenmemiş.
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="glass-panel p-8 rounded-3xl border-l-4 border-secondary hover:bg-white/5 transition-colors">
+                    <h3 class="text-xl font-bold text-white">@item.Title</h3>
+
+                    <p class="text-gray-400">
+                        @item.Name • @item.Year
+                    </p>
+
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                        <p class="text-gray-500 text-sm mt-2">@item.Description</p>
+                    }
+                </div>
+            }
+        }
+    </div>
+</section>

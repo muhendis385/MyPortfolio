@@ -1,0 +1,26 @@
+﻿    @using MyPortfolio.Data
+@model About
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<section class="scroll-mt-20" id="about">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Hakkımda
+    </h2>
+
+    <div class="glass-panel p-8 rounded-3xl border-t border-white/10">
+        @if (Model == null)
+        {
+            <p class="text-gray-400 italic">
+                Henüz hakkında bilgisi eklenmedi.
+            </p>
+        }
+        else
+        {
+            <p class="text-gray-300 leading-loose">
+                @Model.Description
+            </p>
+        }
+    </div>
+</section>

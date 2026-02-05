@@ -1,0 +1,36 @@
+﻿@model MyPortfolio.Data.Message
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-area">
+    <div style="margin-bottom:30px;">
+        <h2 style="color:#fff; font-size:24px;">Mesaj Detayı</h2>
+        <p style="color:var(--text-muted);">@Model.Date.ToString("dd MMMM yyyy HH:mm") tarihinde gönderildi.</p>
+    </div>
+
+    <div class="table-container" style="padding:40px; max-width:800px; background:#1a1a24; border-radius:20px;">
+        <div style="margin-bottom:25px;">
+            <label style="color:var(--primary-color); font-size:12px; font-weight:700; text-transform:uppercase;">Gönderen Adı</label>
+            <h4 style="color:#fff; font-size:18px; margin-top:5px;">@Model.Name</h4>
+        </div>
+
+        <div style="margin-bottom:25px;">
+            <label style="color:var(--primary-color); font-size:12px; font-weight:700; text-transform:uppercase;">E-posta Adresi</label>
+            <h4 style="color:#fff; font-size:18px; margin-top:5px;">@Model.Email</h4>
+        </div>
+
+        <div style="margin-bottom:30px; padding:20px; background:rgba(255,255,255,0.03); border-radius:15px; border:1px solid rgba(255,255,255,0.05);">
+            <label style="color:var(--primary-color); font-size:12px; font-weight:700; text-transform:uppercase; display:block; margin-bottom:10px;">Mesaj İçeriği</label>
+            <p style="color:#eee; line-height:1.6; font-size:15px; white-space: pre-wrap;">@Model.Description</p>
+        </div>
+
+        <div style="display:flex; gap:15px;">
+            <a href="/AdminDashboard/Index" class="btn btn-secondary" style="background:#333; color:#fff; padding:10px 20px; border-radius:10px; text-decoration:none;">
+                <i class="fa-solid fa-arrow-left"></i> Dashboard'a Dön
+            </a>
+            @* İstersen buraya bir de silme butonu ekleyebilirsin *@
+        </div>
+    </div>
+</div>

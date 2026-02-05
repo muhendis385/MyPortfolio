@@ -1,0 +1,21 @@
+﻿@model MyPortfolio.Data.Profile
+
+<section class="scroll-mt-20" id="hero">
+    @if (Model != null)
+    {
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 mb-8">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-xs font-bold text-secondary uppercase tracking-widest">Available for Hire</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black text-white leading-none mb-6 glow-text">
+            @Model.Title<br />
+        </h1>
+        <p class="text-gray-400 text-xl max-w-2xl leading-relaxed">
+            @Model.Description
+        </p>
+    }
+    else
+    {
+        <p class="text-white">Profil bilgisi bulunamadı. Lütfen veri tabanını kontrol edin.</p>
+    }
+</section>

@@ -1,0 +1,307 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["ActiveMenu"] = "Dashboard";
+}
+@model List<MyPortfolio.Data.Message>
+<!-- 0. Dashboard -->
+<div id="section-dashboard" class="page-section">
+    <div class="dashboard-grid">
+
+        <!-- 1. İlk Projem -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div class="card-info">
+                <p>İlk Projem</p>
+                <h3>@ViewBag.firstProject</h3>
+            </div>
+        </div>
+
+        <!-- 2. Son Projem -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-code-branch"></i>
+            </div>
+            <div class="card-info">
+                <p>Son Projem</p>
+                <h3>@ViewBag.lastProject</h3>
+            </div>
+        </div>
+
+        <!-- 3. Toplam Proje Sayısı -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <div class="card-info">
+                <p>Toplam Proje Sayısı</p>
+                <h3>@ViewBag.totalProjects</h3>
+            </div>
+        </div>
+
+        <!-- 4. En Çok Hangi Kategoride -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="card-info">
+                <p>En Çok Var Olan Kategori Kategori</p>
+                <h3>@ViewBag.MostUsedCategoryName</h3>
+            </div>
+        </div>
+
+        <!-- 5. İlk Deneyimim -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="card-info">
+                <p>İlk Deneyimim</p>
+                <h3>@ViewBag.firstExperience</h3>
+            </div>
+        </div>
+
+        <!-- 5. Toplam Sertifika Sayısı -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="card-info">
+                <p>Toplam Sertifika</p>
+                <h3>@ViewBag.totalCertificates</h3>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="card-info">
+                <p>Okuduğum İlk Üniversite</p>
+                <h3>@ViewBag.firstUniversity</h3>
+            </div>
+        </div>
+
+        <!-- 6. En Yüksek Yetenek Seviyesi -->
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="card-info">
+                <p>En Yüksek Yetenek</p>
+                <h3>@ViewBag.bestSkill</h3>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="message-section" style="margin-top: 40px;">
+        <h2 style="color: #fff; margin-bottom: 20px; font-size: 20px;">
+            <i class="fa-solid fa-envelope" style="margin-right: 10px; color: var(--primary-color);"></i>Son Gelen Mesajlar
+        </h2>
+        <div class="message-table-container">
+            <table class="message-table">
+                <thead>
+                    <tr>
+                        <th>Gönderen</th>
+                        <th>E-posta</th>
+                        <th>Mesaj Özeti</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="font-weight-bold">@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>
+                                @{
+                                    // Mesaj çok uzunsa dashboard'da kısa gösterelim
+                                    string desc = item.Description ?? "";
+                                    string shortDesc = desc.Length > 50 ? desc.Substring(0, 50) + "..." : desc;
+                                }
+                                @shortDesc
+                            </td>
+                            @* Dashboard/Index.cshtml içindeki tablo hücresi *@
+                            @* <td>
+                                <a href="/AdminDashboard/MessageDetails/@item.MessageId" class="btn-detail">Detay</a>
+
+                                <a href="/AdminDashboard/DeleteMessage/@item.MessageId"
+                                   class="btn-delete-modern"
+                                   onclick="return confirm('Bu mesajı silmek istediğinize emin misiniz?')"
+                                   style="background:#f87171; color:white; padding:6px 15px; border-radius:8px; text-decoration:none; font-size:12px; margin-left:5px;">
+                                    <i class="fa-solid fa-trash"></i> Sil
+                                </a>
+                            </td> *@
+                            <td>
+                                <a href="/AdminDashboard/MessageDetails/@item.MessageId" class="btn-detail">
+                                    <i class="fa-solid fa-eye"></i> Detay
+                                </a>
+
+                                <a href="/AdminDashboard/DeleteMessage/@item.MessageId"
+                                   class="btn-delete-modern"
+                                   onclick="return confirm('Bu mesajı sonsuza siliyorsunuz, emin misiniz?')">
+                                    <i class="fa-solid fa-trash-can"></i> Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* --- DASHBOARD STİLLERİ --- */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        width: 100%;
+    }
+
+    .dashboard-card {
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        border-radius: 15px;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: #555;
+        }
+
+        /* Kartların altına ince bir gradient çizgi */
+        .dashboard-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+        .card-icon i {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+    .card-info h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+
+    .card-info p {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* --- MESAJ TABLOSU STİLLERİ --- */
+    .message-table-container {
+        background-color: var(--card-bg);
+        border: 1px solid #333;
+        border-radius: 15px;
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    .message-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #fff;
+    }
+
+        .message-table th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid #333;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .message-table td {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+            font-size: 14px;
+        }
+
+        .message-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+    .btn-detail {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 6px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 12px;
+        transition: opacity 0.3s;
+    }
+
+        .btn-detail:hover {
+            opacity: 0.8;
+            color: #fff;
+        }
+
+
+    /* Modern Sil Butonu */
+    .btn-delete-modern {
+        background: rgba(248, 113, 113, 0.1); /* Çok hafif şeffaf kırmızı arka plan */
+        color: #f87171; /* Canlı kırmızı yazı */
+        border: 1px solid rgba(248, 113, 113, 0.2);
+        padding: 8px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .btn-delete-modern:hover {
+            background: #f87171; /* Üzerine gelince tam kırmızı olur */
+            color: #fff; /* Yazı beyaz olur */
+            box-shadow: 0 0 15px rgba(248, 113, 113, 0.4); /* Glow efekti */
+            transform: translateY(-2px);
+            border-color: #f87171;
+        }
+
+        .btn-delete-modern i {
+            font-size: 14px;
+        }
+</style>

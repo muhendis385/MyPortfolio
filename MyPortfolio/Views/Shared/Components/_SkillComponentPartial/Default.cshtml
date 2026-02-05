@@ -1,0 +1,35 @@
+﻿@using MyPortfolio.Data
+@model List<Skill>
+
+<section class="scroll-mt-20" id="skills">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Yetenekler
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="col-span-full glass-panel p-6 rounded-2xl text-center text-gray-400 italic">
+                Henüz yetenek eklenmemiş.
+            </div>
+        }
+        else
+        {
+            @foreach (var skill in Model)
+            {
+                <div class="space-y-4">
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-gray-300">@skill.Name</span>
+                        <span class="text-secondary">@skill.Level%</span>
+                    </div>
+
+                    <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-main-gradient rounded-full shadow-[0_0_15px_rgba(178,36,239,0.5)] transition-all duration-1000"
+                             style="width: @(skill.Level)%">
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>

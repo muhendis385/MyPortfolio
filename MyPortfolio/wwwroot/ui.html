@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ahmet Semiz | Full Stack Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff791a", // Orange
+                        "secondary": "#b224ef", // Vibrant Purple
+                        "background-dark": "#0f0f12",
+                        "surface-dark": "#1a1a20",
+                    },
+                    fontFamily: { "display": ["Outfit", "sans-serif"] },
+                    backgroundImage: {
+                        'main-gradient': 'linear-gradient(135deg, #6a11cb 0%, #b224ef 50%, #ff791a 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        /* ÖZEL SCROLL BAR - Admin Paneli ile Aynı */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f12; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #b224ef 0%, #ff791a 100%);
+            border-radius: 20px;
+            border: 2px solid #0f0f12;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #ff791a; }
+
+        .glass-panel {
+            background: rgba(26, 26, 32, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            background: rgba(178, 36, 239, 0.1);
+            border-left: 4px solid #b224ef;
+        }
+        
+        .nav-item.active .nav-text { color: #fff; font-weight: 700; }
+        .nav-item.active .nav-icon { color: #b224ef; font-variation-settings: 'FILL' 1; }
+
+        html { scroll-behavior: smooth; }
+        .glow-text { text-shadow: 0 0 20px rgba(178, 36, 239, 0.3); }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 font-display overflow-x-hidden">
+
+<div class="flex h-screen w-full overflow-hidden">
+    <aside class="hidden md:flex flex-col w-80 h-full fixed left-0 top-0 z-50 glass-panel border-r border-white/5">
+        <div class="p-8 pb-4">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="rounded-xl h-14 w-14 bg-main-gradient flex items-center justify-center shadow-[0_0_20px_rgba(178,36,239,0.4)]">
+                    <span class="material-symbols-outlined text-white text-3xl">bolt</span>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="text-white text-xl font-bold tracking-tight">Ahmet Semiz</h1>
+                    <p class="text-secondary text-xs font-bold tracking-widest uppercase">Full Stack Engineer</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto px-4 space-y-1">
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#hero">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">home</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Ana Bilgiler</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#about">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">person</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Hakkımda</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#experience">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">history_edu</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Deneyimler</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#education">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">school</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Eğitim</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#skills">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">code</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Yetenekler</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#certs">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">workspace_premium</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Sertifikalar</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#projects">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">rocket_launch</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">Projeler</span>
+            </a>
+            <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#contact">
+                <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">alternate_email</span>
+                <span class="nav-text text-gray-400 text-sm group-hover:text-white">İletişim</span>
+            </a>
+        </nav>
+
+        <div class="p-6 mt-auto border-t border-white/5">
+            <button class="w-full rounded-xl h-12 bg-main-gradient text-white text-sm font-bold shadow-lg shadow-secondary/20 hover:scale-[1.02] transition-transform">
+                CV İndir
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 ml-0 md:ml-80 h-full overflow-y-auto">
+        
+        <div class="max-w-5xl mx-auto px-6 py-16 md:px-12 flex flex-col gap-40">
+            
+            <section class="scroll-mt-20" id="hero">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-xs font-bold text-secondary uppercase tracking-widest">Available for Hire</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-black text-white leading-none mb-6 glow-text">
+                    Geleceği <br/>
+                    <span class="text-transparent bg-clip-text bg-main-gradient">Kodluyorum.</span>
+                </h1>
+                <p class="text-gray-400 text-xl max-w-2xl leading-relaxed">
+                    Ben Ahmet, ölçeklenebilir backend sistemleri ve modern frontend mimarileri üzerine uzmanlaşmış bir yazılım mühendisiyim. Karmaşık problemleri zarif kodlara dönüştürüyorum.
+                </p>
+            </section>
+
+            <section class="scroll-mt-20" id="about">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Hakkımda
+                </h2>
+                <div class="glass-panel p-8 rounded-3xl border-t border-white/10">
+                    <p class="text-gray-300 leading-loose">
+                        Yazılım geliştirme yolculuğumda her zaman en güncel teknolojileri, en verimli mimarilerle birleştirmeyi hedefledim. .NET Core, Java ve modern web teknolojileri ile kurumsal seviyede çözümler üretiyorum.
+                    </p>
+                </div>
+            </section>
+
+            <section class="scroll-mt-20" id="experience">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Deneyimler
+                </h2>
+                <div class="space-y-6">
+                    <div class="glass-panel p-8 rounded-3xl hover:border-secondary/30 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Senior Backend Developer</h3>
+                                <p class="text-secondary font-medium">TechCorp Solutions</p>
+                            </div>
+                            <span class="text-xs font-bold text-gray-500 uppercase">2021 - Günümüz</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Mikroservis mimarisine geçiş sürecini yönettim. Veritabanı optimizasyonları ile sistem hızını %40 artırdım.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="scroll-mt-20" id="education">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Eğitim
+                </h2>
+                <div class="glass-panel p-8 rounded-3xl border-l-4 border-secondary">
+                    <h3 class="text-xl font-bold text-white">Bilgisayar Mühendisliği</h3>
+                    <p class="text-gray-400">Üniversite Adı • 2017 - 2021</p>
+                </div>
+            </section>
+
+            <section class="scroll-mt-20" id="skills">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Yetenekler
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">ASP.NET Core</span><span class="text-secondary">90%</span></div>
+                        <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-main-gradient w-[90%] rounded-full shadow-[0_0_15px_rgba(178,36,239,0.5)]"></div>
+                        </div>
+                    </div>
+                    </div>
+            </section>
+
+            <section class="scroll-mt-20" id="certs">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Sertifikalar
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                        <span class="material-symbols-outlined text-secondary">verified</span>
+                        <p class="text-sm font-bold text-white">AWS Architect</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="scroll-mt-20" id="projects">
+                <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+                    <span class="h-8 w-1 bg-secondary rounded-full"></span> Projeler
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="group relative rounded-3xl overflow-hidden glass-panel border border-white/5">
+                        <div class="aspect-video bg-surface-dark bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://via.placeholder.com/600x400')"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-80"></div>
+                        <div class="absolute bottom-0 p-8">
+                            <h3 class="text-xl font-bold text-white mb-2">Finans Dashboard</h3>
+                            <p class="text-gray-400 text-sm">Real-time veri analizi ve raporlama sistemi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pb-20 scroll-mt-20" id="contact">
+                <div class="glass-panel rounded-[3rem] p-12 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-5xl font-black text-white mb-6">Hadi Tanışalım.</h2>
+                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input class="bg-surface-dark border-white/10 text-white rounded-2xl p-4 focus:ring-secondary focus:border-secondary" placeholder="Adınız" type="text"/>
+                            <input class="bg-surface-dark border-white/10 text-white rounded-2xl p-4 focus:ring-secondary focus:border-secondary" placeholder="E-posta" type="email"/>
+                            <textarea class="md:col-span-2 bg-surface-dark border-white/10 text-white rounded-2xl p-4 focus:ring-secondary focus:border-secondary" placeholder="Mesajınız" rows="4"></textarea>
+                            <button class="md:col-span-2 py-4 rounded-2xl bg-main-gradient text-white font-bold text-lg shadow-xl shadow-secondary/20 hover:scale-[1.01] transition-transform">Mesaj Gönder</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Scroll Spy: Aktif menü elemanını vurgula
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href').substring(1) === entry.target.id) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => observer.observe(section));
+    });
+</script>
+</body>
+</html>

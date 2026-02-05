@@ -1,0 +1,85 @@
+﻿@* Sidebar Bileşeni *@
+<style>
+    .glass-panel {
+        background: rgba(26, 26, 32, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item.active {
+        background: rgba(178, 36, 239, 0.1);
+        border-left: 4px solid #b224ef;
+    }
+
+        .nav-item.active .nav-text {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #b224ef;
+            font-variation-settings: 'FILL' 1;
+        }
+
+    .glow-text {
+        text-shadow: 0 0 20px rgba(178, 36, 239, 0.3);
+    }
+</style>
+
+<aside class="hidden md:flex flex-col w-80 h-full fixed left-0 top-0 z-50 glass-panel border-r border-white/5">
+    @* Logo / Profil Alanı *@
+    <div class="p-8 pb-4">
+        <div class="flex items-center gap-4 mb-10">
+            <div class="rounded-xl h-14 w-14 bg-main-gradient flex items-center justify-center shadow-[0_0_20px_rgba(178,36,239,0.4)]">
+                <span class="material-symbols-outlined text-white text-3xl">bolt</span>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="text-white text-xl font-bold tracking-tight">Ahmet Semiz</h1>
+                <p class="text-secondary text-xs font-bold tracking-widest uppercase">Full Stack Engineer</p>
+            </div>
+        </div>
+    </div>
+
+    @* Menü Navigasyonu *@
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1">
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#hero">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">home</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Ana Bilgiler</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#about">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">person</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Hakkımda</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#experience">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">history_edu</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Deneyimler</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#education">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">school</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Eğitim</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#skills">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">code</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Yetenekler</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#certs">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">workspace_premium</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Sertifikalar</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#projects">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">rocket_launch</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">Projeler</span>
+        </a>
+        <a class="nav-item flex items-center gap-4 px-4 py-3 rounded-xl transition-all hover:bg-white/5 group" href="#contact">
+            <span class="material-symbols-outlined nav-icon text-gray-500 group-hover:text-secondary">alternate_email</span>
+            <span class="nav-text text-gray-400 text-sm group-hover:text-white">İletişim</span>
+        </a>
+    </nav>
+
+    @* Alt Buton *@
+    <div class="p-6 mt-auto border-t border-white/5">
+        <button class="w-full rounded-xl h-12 bg-main-gradient text-white text-sm font-bold shadow-lg shadow-secondary/20 hover:scale-[1.02] transition-transform">
+            CV İndir
+        </button>
+    </div>
+</aside>

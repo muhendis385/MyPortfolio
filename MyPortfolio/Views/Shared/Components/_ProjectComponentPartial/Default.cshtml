@@ -1,0 +1,38 @@
+﻿@using MyPortfolio.Data
+@model List<Project>
+
+<section class="scroll-mt-20" id="projects">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Projeler
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var project in Model)
+            {
+                <div class="group relative rounded-3xl overflow-hidden glass-panel border border-white/5">
+
+                    @* Proje Görseli *@
+                    <div class="aspect-video bg-surface-dark bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                         style="background-image: url('https://via.placeholder.com/600x400')">
+                    </div>
+
+                    @* Karartma Efekti *@
+                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent opacity-80"></div>
+
+                    @* İçerik *@
+                    <div class="absolute bottom-0 p-8">
+                        <h3 class="text-xl font-bold text-white mb-2">@project.Name</h3>
+                        <p class="text-gray-400 text-sm">@project.Description</p>
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-gray-400">Henüz proje eklenmemiş.</p>
+        }
+    </div>
+</section>

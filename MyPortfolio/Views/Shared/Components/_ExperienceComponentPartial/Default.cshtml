@@ -1,0 +1,33 @@
+﻿@using MyPortfolio.Data
+@model List<Experience>
+
+<section class="scroll-mt-20" id="experience">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Deneyimler
+    </h2>
+
+    <div class="space-y-6">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="glass-panel p-8 rounded-3xl text-center text-gray-400 italic">
+                Henüz deneyim eklenmemiş.
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="glass-panel p-8 rounded-3xl hover:border-secondary/30 transition-colors">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">@item.Title</h3>
+                            <p class="text-secondary font-medium">@item.CompanyName</p>
+                        </div>
+                        <span class="text-xs font-bold text-gray-500 uppercase">@item.Year</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">@item.Description</p>
+                </div>
+            }
+        }
+    </div>
+</section>

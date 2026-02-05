@@ -1,0 +1,64 @@
+﻿@model MyPortfolio.Data.Project
+@{
+    ViewData["Title"] = "Proje Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-area">
+
+    <div style="margin-bottom:40px;">
+        <h2 style="font-size:26px; font-weight:700; color:#fff;">Proje Ekle</h2>
+        <p style="color:var(--text-muted); font-size:14px; margin-top:8px;">
+            Proje adı, açıklama ve opsiyonel link/görsel ekleyebilirsin.
+        </p>
+    </div>
+
+    <form method="post" class="table-container" style="padding:35px; max-width:900px;">
+        @Html.AntiForgeryToken()
+
+        <div style="margin-bottom:22px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                Proje Adı (Name)
+            </label>
+            <input asp-for="Name"
+                   style="width:100%; padding:14px 16px; border-radius:12px; background-color:#14141a;
+                          border:1px solid var(--border-color); color:#fff; font-size:14px;" />
+            <span style="display:block; margin-top:8px; font-size:12px; color:#f87171;">
+                @Html.ValidationMessageFor(x => x.Name)
+            </span>
+        </div>
+
+        <div style="margin-bottom:22px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                Açıklama (Description)
+            </label>
+            <textarea asp-for="Description" rows="5"
+                      style="width:100%; padding:14px 16px; border-radius:12px; background-color:#14141a;
+                             border:1px solid var(--border-color); color:#fff; font-size:14px; resize:none;"></textarea>
+            <span style="display:block; margin-top:8px; font-size:12px; color:#f87171;">
+                @Html.ValidationMessageFor(x => x.Description)
+            </span>
+        </div>
+
+        <div style="margin-bottom:22px;">
+            <label style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">
+                Görsel URL (ImageUrl) (Opsiyonel)
+            </label>
+            <input asp-for="ImageUrl" placeholder="https://..."
+                   style="width:100%; padding:14px 16px; border-radius:12px; background-color:#14141a;
+                          border:1px solid var(--border-color); color:#fff; font-size:14px;" />
+        </div>
+
+       
+
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+            <a asp-controller="AdminProject" asp-action="Index" class="btn btn-sm btn-edit" style="text-decoration:none;">
+                <i class="fa-solid fa-arrow-left"></i> Geri
+            </a>
+
+            <button type="submit" class="btn btn-add">
+                <i class="fa-solid fa-plus"></i> Kaydet
+            </button>
+        </div>
+    </form>
+</div>

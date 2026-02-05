@@ -1,0 +1,76 @@
+﻿@using MyPortfolio.Data
+@model List<About>
+@{
+    ViewData["Title"] = "Hakkımda";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["ActiveMenu"] = "About";
+    int count = 0;
+}
+
+<div class="page-section">
+
+    <div class="toolbar">
+        @if (Model == null || !Model.Any())
+        {
+            <a asp-controller="AdminAbout" asp-action="CreateAbout" class="btn btn-add">
+                <i class="fa-solid fa-plus"></i> Yeni Hakkımda Ekle
+            </a>
+        }
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="margin-bottom:18px; padding:12px 16px; border-radius:12px;
+                        border:1px solid rgba(34,197,94,0.35);
+                        background: rgba(34,197,94,0.08);
+                        color:#bbf7d0;">
+            <i class="fa-solid fa-circle-check" style="margin-right:8px;"></i>
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Açıklama</th>
+                    <th style="width:180px;">İşlemler</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null || !Model.Any())
+                {
+                    <tr>
+                        <td colspan="3" style="text-align:center; padding:40px; color: var(--text-muted);">
+                            <i class="fa-regular fa-folder-open" style="font-size:24px; margin-bottom:10px; display:block;"></i>
+                            Henüz Hakkımda içeriği yok. “Yeni Hakkımda Ekle” ile oluşturabilirsin.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td style="max-width: 850px;">
+                                @item.Description
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a asp-controller="AdminAbout" asp-action="UpdateAbout" asp-route-id="@item.AboutId"
+                                       class="btn btn-sm btn-edit">
+                                        <i class="fa-solid fa-pen"></i> Güncelle
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@using MyPortfolio.Data
+@model List<Certificate>
+
+<section class="scroll-mt-20" id="certificates">
+    <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-4">
+        <span class="h-8 w-1 bg-secondary rounded-full"></span> Sertifikalar
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="col-span-full glass-panel p-6 rounded-2xl text-center text-gray-400 italic">
+                Henüz sertifika eklenmemiş.
+            </div>
+        }
+        else
+        {
+            @foreach (var cert in Model)
+            {
+                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all">
+                    <span class="material-symbols-outlined text-secondary">verified</span>
+
+                    <div>
+                        <p class="text-sm font-bold text-white">@cert.Name</p>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wider">
+                            @cert.Description
+                        </p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
