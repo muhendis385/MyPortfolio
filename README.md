@@ -31,7 +31,7 @@ Ziyaretçilerin UI üzerinden gönderdiği mesajların, admin panelinde tarihli 
 ## 📸 Ekran Görüntüleri
 
 🌐 Kullanıcı Arayüzü (UI)
-**-----------------------------------------------------------**
+* **-----------------------------------------------------------**
 🏠 Ana Bilgiler
 
 <img width="2856" height="1164" alt="AnaBilgiler" src="https://github.com/user-attachments/assets/1b30e3c7-456e-4075-afa2-c4904bbfb94f" />
@@ -43,7 +43,7 @@ Ziyaretçilerin UI üzerinden gönderdiği mesajların, admin panelinde tarihli 
 💼 Deneyimler
 
 <img width="2812" height="1288" alt="Deneyimler" src="https://github.com/user-attachments/assets/2aa4f0ff-eff0-4cb3-af32-b3819be1b5f6" />
-**---------------------------**
+---------------------------
 🎓 Eğitim
 
 <img width="2856" height="1282" alt="Eğitim" src="https://github.com/user-attachments/assets/005b42b8-8f56-4e51-a0ad-dd11f92d4a09" />
